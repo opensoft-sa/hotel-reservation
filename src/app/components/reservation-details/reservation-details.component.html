@@ -1,1 +1,20 @@
-<lf-form path="/reservation-details"></lf-form>
+<lf-form path="/reservation-details">
+  <lf-text path="name"></lf-text>
+  <lf-text path="email"></lf-text>
+  <lf-date-range path="check-in-out"></lf-date-range>
+  <lf-number path="check-in-hour"></lf-number>
+
+  <lf-table path="rooms">
+    <lf-table-header>
+      <lf-table-column id="type"></lf-table-column>
+      <lf-table-column id="smoking-room"></lf-table-column>
+    </lf-table-header>
+
+    <ng-template #lfTableRowTemplate let-id="id" let-i="index">
+      <tr lf-table-row [path]="id">
+        <td lf-table-cell><lf-select path="type"></lf-select></td>
+        <td lf-table-cell><lf-checkbox path="smoking-room"></lf-checkbox></td>
+      </tr>
+    </ng-template>
+  </lf-table>
+</lf-form>

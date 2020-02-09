@@ -1,11 +1,13 @@
 <lf-form path="/guests">
   <lf-table path=".">
     <lf-table-header>
+      <lf-table-column id="name"></lf-table-column>
       <lf-table-column id="navigation"></lf-table-column>
     </lf-table-header>
 
     <ng-template #lfTableRowTemplate let-id="id">
       <tr lf-table-row [path]="id">
+        <td lf-table-cell><lf-text path="name"></lf-text></td>
         <td lf-table-cell>
           <a
             lf-button

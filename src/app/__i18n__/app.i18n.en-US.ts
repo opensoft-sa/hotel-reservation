@@ -11,6 +11,6 @@ export const appI18nEnUS: Record<string, any> = {
     }
   },
   '/': {
-    label: 'App'
+    label: 'Hotel reservation'
   }
 };
