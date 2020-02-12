@@ -10,10 +10,18 @@ export const reservationDetailsI18nEnUS: Record<string, any> = {
     helpMessage: 'The reservation will be made in this name'
   },
   '/reservation-details/email': {
-    label: 'E-mail'
+    label: 'E-mail',
+    validations: {
+      INVALID_EMAIL: 'The e-mail is invalid.'
+    }
   },
   '/reservation-details/check-in-out': {
-    label: 'Check-in/check-out dates'
+    label: 'Check-in/check-out dates',
+    legend: 'Check-in from 16:00h to 23:00h',
+    validations: {
+      CHECK_IN_OUT_SAME_DAY:
+        'The check-in and check-out cannot be on the same day.'
+    }
   },
   '/reservation-details/check-in-hour': {
     label: 'Arrival time',
@@ -28,6 +36,9 @@ export const reservationDetailsI18nEnUS: Record<string, any> = {
     columnLabels: {
       type: 'Room type',
       'smoking-room': 'Smoking room?'
+    },
+    validations: {
+      LF_SIZE_OUT_OF_BOUNDS: 'At least 1 room must be added.'
     }
   },
   '/reservation-details/rooms/?/type': {

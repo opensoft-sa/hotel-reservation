@@ -29,6 +29,7 @@
     "@lightweightform/theme-common": "^4.4.5",
     "@schematics/angular": "~8.3.23",
     "bootstrap": "~4.4.1",
+    "date-fns": "^2.9.0",
     "font-awesome": "^4.7.0",
     "jquery": "^3.4.1",
     "mobx": "5.14.2",
