@@ -1,4 +1,12 @@
 /**
+ * Currency options for the en-US locale.
+ */
+const currencyOptions = {
+  thousandsSeparator: ',',
+  prefix: '€'
+};
+
+/**
  * Reservation details i18n object for the en-US locale.
  */
 export const reservationDetailsI18nEnUS: Record<string, any> = {
@@ -35,6 +43,7 @@ export const reservationDetailsI18nEnUS: Record<string, any> = {
     noRowsText: 'No rooms added.',
     columnLabels: {
       type: 'Room type',
+      price: 'Price per night',
       'smoking-room': 'Smoking room?'
     },
     validations: {
@@ -49,7 +58,15 @@ export const reservationDetailsI18nEnUS: Record<string, any> = {
       { value: 'twin', label: 'Twin' }
     ]
   },
+  '/reservation-details/rooms/?/price': {
+    label: 'Room price per night',
+    ...currencyOptions
+  },
   '/reservation-details/rooms/?/smoking-room': {
     label: 'Room for smokers?'
+  },
+  '/reservation-details/total-amount': {
+    label: 'Total amount',
+    ...currencyOptions
   }
 };

@@ -11,3 +11,12 @@ export const MAX_ROOM_GUESTS = {
  * Minimum age of an adult.
  */
 export const ADULT_AGE = 18;
+
+/**
+ * Price per night for each room type.
+ */
+export const ROOM_PRICES = {
+  single: 50,
+  double: 90,
+  twin: 90
+};
