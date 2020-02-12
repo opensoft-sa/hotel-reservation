@@ -1,9 +1,15 @@
 import { Component, ViewChild, OnInit, isDevMode } from '@angular/core';
 import {
   ActionsMenuAction,
-  AppComponent as LfAppComponent
+  AppComponent as LfAppComponent,
+  ModalComponent
 } from '@lightweightform/bootstrap-theme';
-import { LfStorage, LfFileStorage, LfUnloadAlert } from '@lightweightform/core';
+import {
+  LfStorage,
+  LfFileStorage,
+  LfI18n,
+  LfUnloadAlert
+} from '@lightweightform/core';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +17,7 @@ import { LfStorage, LfFileStorage, LfUnloadAlert } from '@lightweightform/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'hotel-reservation';
+  reservationConfirmed = false;
 
   actions: ActionsMenuAction[] = [
     {
@@ -28,24 +34,37 @@ export class AppComponent implements OnInit {
       callback: () => this.load()
     },
     {
+      id: 'language',
+      style: 'outline-primary',
+      icon: 'language',
+      options: this.lfI18n.languages.map(lang => ({
+        id: lang,
+        value: lang,
+        isActive: () => this.lfI18n.currentLanguage === lang
+      })),
+      callback: lang => this.lfI18n.setCurrentLanguage(lang)
+    },
+    {
       id: 'validate',
       style: 'outline-danger',
       icon: 'check-square-o',
       callback: () => this.lfApp.validate()
     },
     {
-      id: 'submit',
+      id: 'finalize',
       style: 'outline-success',
       icon: 'send',
-      callback: () => this.submit()
+      callback: () => this.finalize()
     }
   ];
 
   @ViewChild(LfAppComponent, { static: false }) lfApp: LfAppComponent;
+  @ViewChild('finalizeModal', { static: false }) finalizeModal: ModalComponent;
 
   constructor(
     public lfStorage: LfStorage,
     public lfFileStorage: LfFileStorage,
+    public lfI18n: LfI18n,
     public lfUnloadAlert: LfUnloadAlert
   ) {}
 
@@ -58,7 +77,7 @@ export class AppComponent implements OnInit {
   async save(): Promise<void> {
     try {
       const dateStr = new Date().toISOString().replace(/[T:.]/g, '-');
-      const fileName = `app-${dateStr}`;
+      const fileName = `reservation-${dateStr}`;
       await this.lfFileStorage.saveToFile('/', fileName);
       this.lfStorage.setPristine();
     } catch (err) {
@@ -75,12 +94,16 @@ export class AppComponent implements OnInit {
     }
   }
 
-  submit(): void {
+  finalize(): void {
     if (!this.lfStorage.hasErrors()) {
-      const appJSON = JSON.stringify(this.lfStorage.getAsJS());
-      alert(appJSON); // Do something with the JSON
+      this.finalizeModal.show();
     } else {
       this.lfApp.validate();
     }
+  }
+
+  async confirmFinalize(): Promise<void> {
+    await this.finalizeModal.hide();
+    this.reservationConfirmed = true;
   }
 }

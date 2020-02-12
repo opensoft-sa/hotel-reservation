@@ -11,7 +11,7 @@
         },
         "@lightweightform/bootstrap-theme:form": {
           "style": "scss",
-          "locales": "en-US"
+          "locales": "en-US,pt-PT"
         }
       },
       "root": "",

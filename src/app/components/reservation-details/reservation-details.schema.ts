@@ -10,7 +10,7 @@ import {
 } from '@lightweightform/storage';
 import { dateRangeSchema } from '@lightweightform/bootstrap-theme';
 import differenceInCalendarDays from 'date-fns/differenceInCalendarDays';
-import { emailValidator } from '../../utils/validators';
+import { emailValidator, phoneNumberValidator } from '../../utils/validators';
 import { ROOM_PRICES } from '../../utils/constants';
 
 /**
@@ -19,6 +19,10 @@ import { ROOM_PRICES } from '../../utils/constants';
 export const reservationDetailsSchema: RecordSchema = recordSchema({
   name: stringSchema({ minLength: 1 }),
   email: stringSchema({ minLength: 1, validate: emailValidator }),
+  'phone-number': stringSchema({
+    minLength: 1,
+    validate: phoneNumberValidator
+  }),
   'check-in-out': dateRangeSchema({
     isNullable: true,
     isRequired: true,
@@ -31,6 +35,7 @@ export const reservationDetailsSchema: RecordSchema = recordSchema({
     min: 16,
     max: 23
   }),
+  'special-requests': stringSchema(),
   rooms: tableSchema(
     recordSchema({
       type: stringSchema({
@@ -41,7 +46,7 @@ export const reservationDetailsSchema: RecordSchema = recordSchema({
       price: numberSchema({ isNullable: true, computedValue: roomPrice }),
       'smoking-room': booleanSchema()
     }),
-    { minSize: 1 }
+    { minSize: 1, initialValue: [{ type: 'single' }] }
   ),
   'amount-per-night': numberSchema({
     isNullable: true,

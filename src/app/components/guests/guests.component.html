@@ -2,7 +2,11 @@
   <lf-table path=".">
     <lf-table-header>
       <lf-table-column id="name"></lf-table-column>
-      <lf-table-column id="navigation"></lf-table-column>
+      <lf-table-column
+        id="navigation"
+        [fixed]="true"
+        [minWidth]="200"
+      ></lf-table-column>
     </lf-table-header>
 
     <ng-template #lfTableRowTemplate let-id="id">

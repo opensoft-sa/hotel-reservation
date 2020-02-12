@@ -10,7 +10,8 @@ import { computed } from 'mobx-angular';
 export class GuestComponent implements OnInit {
   constructor(private lfRouter: LfRouter) {}
 
-  @computed get path(): string {
+  @computed
+  get path(): string {
     const { 'guest-id': guestId } = this.lfRouter.params;
     return `/guests/${guestId}`;
   }

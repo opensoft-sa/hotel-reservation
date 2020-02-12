@@ -16,7 +16,8 @@ import { MAX_ROOM_GUESTS, ADULT_AGE } from '../../utils/constants';
 export const guestsSchema: TableSchema = tableSchema(guestSchema, {
   minSize: 1,
   maxSize: maxNumberOfGuests,
-  validate: adultGuestExists
+  validate: adultGuestExists,
+  initialValue: [{}]
 });
 
 /**

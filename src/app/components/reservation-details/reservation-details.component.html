@@ -1,8 +1,18 @@
 <lf-form path="/reservation-details">
   <lf-text path="name"></lf-text>
   <lf-text path="email"></lf-text>
-  <lf-date-range path="check-in-out"></lf-date-range>
-  <lf-number path="check-in-hour"></lf-number>
+  <lf-text path="phone-number"></lf-text>
+
+  <div class="row">
+    <div class="col-sm-8 mb-3">
+      <lf-date-range path="check-in-out"></lf-date-range>
+    </div>
+    <div class="col-sm-4 mb-3">
+      <lf-number path="check-in-hour"></lf-number>
+    </div>
+  </div>
+
+  <lf-textarea path="special-requests"></lf-textarea>
 
   <lf-table path="rooms">
     <lf-table-header>
@@ -20,5 +30,9 @@
     </ng-template>
   </lf-table>
 
-  <lf-number path="total-amount" [scale]="2"></lf-number>
+  <div class="row">
+    <div class="offset-sm-6 col-sm-6 mb-3">
+      <lf-number path="total-amount" [scale]="2"></lf-number>
+    </div>
+  </div>
 </lf-form>

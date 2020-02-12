@@ -1,9 +1,14 @@
+import { LfStorage } from '@lightweightform/core';
+import { NumericInput } from '@lightweightform/numeric-input';
+
 /**
  * Currency options for the en-US locale.
  */
 const currencyOptions = {
+  scale: 2,
   thousandsSeparator: ',',
-  prefix: '€'
+  prefix: '€',
+  suffix: ''
 };
 
 /**
@@ -23,6 +28,12 @@ export const reservationDetailsI18nEnUS: Record<string, any> = {
       INVALID_EMAIL: 'The e-mail is invalid.'
     }
   },
+  '/reservation-details/phone-number': {
+    label: 'Phone number',
+    validations: {
+      INVALID_PHONE_NUMBER: 'The phone number is invalid.'
+    }
+  },
   '/reservation-details/check-in-out': {
     label: 'Check-in/check-out dates',
     legend: 'Check-in from 16:00h to 23:00h',
@@ -35,6 +46,9 @@ export const reservationDetailsI18nEnUS: Record<string, any> = {
     label: 'Arrival time',
     suffix: 'h',
     helpMessage: 'Approximate check-in hour (if known)'
+  },
+  '/reservation-details/special-requests': {
+    label: 'Special requests'
   },
   '/reservation-details/rooms': {
     label: 'Rooms',
@@ -67,6 +81,16 @@ export const reservationDetailsI18nEnUS: Record<string, any> = {
   },
   '/reservation-details/total-amount': {
     label: 'Total amount',
-    ...currencyOptions
+    ...currencyOptions,
+    legend: (ctx: LfStorage) => {
+      if (ctx.get() === null) {
+        return '';
+      }
+      const nightsSpent = ctx.get('../nights-spent');
+      const amountPerNight = ctx.get('../amount-per-night');
+      return `${nightsSpent} night${
+        nightsSpent === 1 ? '' : 's'
+      } at ${NumericInput.format(amountPerNight, currencyOptions)} per night`;
+    }
   }
 };
