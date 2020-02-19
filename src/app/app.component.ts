@@ -41,7 +41,7 @@ export class AppComponent implements OnInit {
     }
   ];
 
-  @ViewChild(LfAppComponent, { static: false }) lfApp: LfAppComponent;
+  @ViewChild(LfAppComponent) lfApp: LfAppComponent;
 
   constructor(
     public lfStorage: LfStorage,
