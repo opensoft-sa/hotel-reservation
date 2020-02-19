@@ -58,8 +58,8 @@ export class AppComponent implements OnInit {
     }
   ];
 
-  @ViewChild(LfAppComponent, { static: false }) lfApp: LfAppComponent;
-  @ViewChild('finalizeModal', { static: false }) finalizeModal: ModalComponent;
+  @ViewChild(LfAppComponent) lfApp: LfAppComponent;
+  @ViewChild('finalizeModal') finalizeModal: ModalComponent;
 
   constructor(
     public lfStorage: LfStorage,
